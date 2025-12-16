@@ -1,16 +1,20 @@
 {
   "smartlinks": [
-    "https://m.youtube.com/watch?v=gbmKXeXLcso",
-    "https://m.youtube.com/watch?v=gbmKXeXLcso"
-    
+    "https://ptp.today/160450",
+    "https://otieu.com/4/5823117",
+    "https://bot.free.nf",
+    "https://bot.free.nf",
+    "https://bot.free.nf",
+    "https://bot.free.nf"
   ],
   "settings": {
-    "timeout": 300000,
-    "wait_after_open": 60,
-    "visit_duration": 330,
-    "recycle_interval_seconds": 60,
-    "parallel_smartlinks": 1
+    "timeout": 50000,
+    "wait_after_open": 30,
+    "visit_duration": 50,
+    "recycle_interval_seconds": 10,
+    "parallel_smartlinks": 3
   }
 }
+
 
 
