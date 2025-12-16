@@ -10,6 +10,9 @@ command 3
 
 python3 -m playwright install-deps
 
+sudo python3 -m playwright install-deps
+
+
 command 4 fake screen ke liye
 
 sudo apt-get install xvfb -y
