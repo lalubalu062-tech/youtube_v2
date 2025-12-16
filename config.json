@@ -1,11 +1,10 @@
 {
   "smartlinks": [
     "https://ptp.today/160450",
-    "https://otieu.com/4/5823117",
-    "https://bot.free.nf",
-    "https://bot.free.nf",
-    "https://bot.free.nf",
-    "https://bot.free.nf"
+    "https://viiukuhe.com/dc/?blockID=411408",
+    "https://viiukuhe.com/dc/?blockID=411449",
+    "https://viiukuhe.com/dc/?blockID=411447"
+    
   ],
   "settings": {
     "timeout": 50000,
@@ -15,6 +14,7 @@
     "parallel_smartlinks": 3
   }
 }
+
 
 
 
