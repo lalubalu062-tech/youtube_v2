@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Traffic Bot V2</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #00ff41;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid #333;
+            padding: 20px;
+            background: #010409;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+        h2 {
+            text-align: center;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 15px;
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #8b949e;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            color: #fff;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #00ff41;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #238636;
+            color: #ffffff;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: inherit;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #2ea043;
+        }
+        button:disabled {
+            background: #333;
+            cursor: not-allowed;
+        }
+        #terminal {
+            background: #000;
+            border: 1px solid #30363d;
+            height: 400px;
+            overflow-y: scroll;
+            padding: 15px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .status-line { margin: 2px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>>> ADSTERRA AUTO BOT V2</h2>
+        <form id="botForm">
+            <div class="input-group">
+                <label>>> ENTER TARGET LINK:</label>
+                <input type="url" name="link" placeholder="https://..." required>
+            </div>
+            
+            <div class="input-group">
+                <label>>> ENTER PROXY (Optional):</label>
+                <input type="text" name="proxy" placeholder="ip:port:user:pass OR user:pass">
+            </div>
+            
+            <button type="submit" id="runBtn">_INITIATE SEQUENCE</button>
+        </form>
+
+        <div id="terminal">>> Waiting for command..._</div>
+    </div>
+
+    <script>
+        const form = document.getElementById('botForm');
+        const terminal = document.getElementById('terminal');
+        const runBtn = document.getElementById('runBtn');
+
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            terminal.innerHTML = ">> Connecting to server...\n";
+            runBtn.disabled = true;
+            runBtn.innerText = "RUNNING...";
+            
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch('/run_bot', { 
+                    method: 'POST', 
+                    body: formData 
+                });
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    
+                    const text = decoder.decode(value);
+                    terminal.innerHTML += text;
+                    terminal.scrollTop = terminal.scrollHeight; // Auto scroll
+                }
+            } catch (err) {
+                terminal.innerHTML += `\n[ERROR]: ${err.message}`;
+            } finally {
+                runBtn.disabled = false;
+                runBtn.innerText = "_INITIATE SEQUENCE";
+                terminal.innerHTML += "\n>> READY FOR NEXT COMMAND._";
+            }
+        };
+    </script>
+</body>
+</html>
